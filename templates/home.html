@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Custom styles -->
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('https://cutewallpaper.org/21/1920-x-1080-gif/1920x1080-Wallpapercartoon-Wallpapers-Driverlayer-Search-.gif');
+            background-size: cover;
+            margin-top: 40px;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 20px;
+            margin: auto;
+            max-width: 1200px;
+        }
+
+        .card {
+            border-radius: 20px;
+            padding: 20px;
+            background-color: rgba(211, 211, 211, 0.5);
+            min-height: 400px;
+            width: 100%;
+        }
+
+        .card-title {
+            border-radius: 20px 20px 0 0;
+            background-color: #0b4c61;
+            color: white;
+            padding: 10px;
+            margin: -20px -20px 20px -20px;
+        }
+
+        .card-content {
+            margin-bottom: 30px;
+        }
+
+        .button-primary {
+            display: inline-block;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 300px;
+            text-decoration: none;
+            text-align: center;
+            color: white;
+            background-color: #0b4c61;
+            border: none;
+        }
+
+        .table {
+            width: 100%;
+            background-color: white;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-size: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .form-input {
+            font-size: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 8px;
+        }
+
+        .form-submit-button {
+            width: 100%;
+            max-width: 232px;
+            margin-top: 20px;
+            font-size: 20px;
+            text-align: center;
+            padding: 10px;
+            color: white;
+            background-color: #000;
+            border: none;
+        }
+
+        .total-users {
+            padding: 25px;
+            text-align: center;
+        }
+    </style>
+
+    <title>Face Recognition Based Attendance System</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <h2 class="card-title">Today's Attendance <i class="material-icons">assignment</i></h2>
+            {% if mess %}
+            <p class="error-message">{{ mess }}</p>
+            {% endif %}
+            <a href="/start" class="button-primary">Take Attendance <i class="material-icons">beenhere</i></a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>S No</th>
+                        <th>Name</th>
+                        <th>ID</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if l %}
+                    {% for i in range(l) %}
+                    <tr>
+                        <td>{{ i+1 }}</td>
+                        <td>{{ names[i] }}</td>
+                        <td>{{ rolls[i] }}</td>
+                        <td>{{ times[i] }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <form action="/add" method="POST" enctype="multipart/form-data">
+                <h2 class="card-title">Add New User <i class="material-icons">control_point_duplicate</i></h2>
+                <label for="newusername" class="form-label">Enter New User Name*</label>
+                <input type="text" id="newusername" name="newusername" class="form-input" required>
+                <label for="newuserid" class="form-label">Enter New User ID*</label>
+                <input type="number" id="newusereid" name="newuserid" class="form-input" required>
+                <button type="submit" class="form-submit-button">Add New User</button>
+                <h5 class="total-users"><i>Total Users in Database: {{ totalreg }}</i></h5>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-...some-integrity-hash..."></script>
+</body>
+
+</html>
